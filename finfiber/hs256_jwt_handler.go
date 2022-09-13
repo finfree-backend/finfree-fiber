@@ -17,8 +17,7 @@ func NewHS256Middleware(key []byte, errorHandler fiber.ErrorHandler, successHand
 
 func NewDefaultHS256(key []byte, payloadKeys ...string) *HS256Middleware {
 	var errorHandler fiber.ErrorHandler = func(ctx *fiber.Ctx, err error) error {
-		ctx.Locals(IS_AUTHORIZED_LOCAL_KEY, false)
-		return ctx.Next()
+		return &fiber.Error{Code: 401, Message: "Invalid/Blank or expired auth token"}
 	}
 
 	var successHandler fiber.Handler = func(ctx *fiber.Ctx) error {

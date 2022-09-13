@@ -5,7 +5,7 @@ var (
 	SIZE_QUERY_KEY = "size"
 
 	IS_AUTHORIZED_LOCAL_KEY = "is_authorized"
-	DEFAULT_JWT_KEYS        = []string{"username", "locale"}
+	DEFAULT_JWT_KEYS        = []string{"username", "locale", "jurisdiction"}
 )
 
 // If yout do not want to use default pagination query keys ('page' & 'size')

@@ -17,10 +17,6 @@ func NewES256Middleware(key []byte, errorHandler fiber.ErrorHandler, successHand
 
 func NewDefaultES256(key []byte, payloadKeys ...string) *ES256Middleware {
 	var errorHandler fiber.ErrorHandler = func(ctx *fiber.Ctx, err error) error {
-
-		if ctx.Locals(IS_AUTHORIZED_LOCAL_KEY).(bool) {
-			return ctx.Next()
-		}
 		return &fiber.Error{Code: 401, Message: "Invalid/Blank or expired auth token"}
 	}
 

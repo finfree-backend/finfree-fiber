@@ -36,7 +36,10 @@ func NewSuccessResponse(data interface{}) *SuccessResponse {
 	}
 }
 
-func NewSuccessResponseWithNextUrl(data interface{}, URI *fasthttp.URI, total int) *SuccessResponse {
+// data: response body
+// URI: URI of request ( can be reached by ctx.Request().URI() )
+// totalCount: total count of documents
+func NewSuccessResponseWithNextUrl(data interface{}, URI *fasthttp.URI, totalCount int) *SuccessResponse {
 	resp := NewSuccessResponse(data)
 
 	page, err := URI.QueryArgs().GetUint(PAGE_QUERY_KEY)
@@ -49,7 +52,7 @@ func NewSuccessResponseWithNextUrl(data interface{}, URI *fasthttp.URI, total in
 		return resp
 	}
 
-	if page*size < total {
+	if (page+1)*size < totalCount {
 		URI.QueryArgs().Set(PAGE_QUERY_KEY, fmt.Sprintf("%d", page+1))
 		resp.NextUrl = URI.String()
 	}

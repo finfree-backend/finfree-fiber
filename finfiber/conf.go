@@ -15,6 +15,6 @@ func SetQueryKeys(pageKey, sizeKey string) {
 	SIZE_QUERY_KEY = sizeKey
 }
 
-func SetDefaultJWTKeys(keys ...string) {
+func SetJWTKeys(keys ...string) {
 	DEFAULT_JWT_KEYS = keys
 }

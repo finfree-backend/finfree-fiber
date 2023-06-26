@@ -54,3 +54,7 @@ func (e *ES256Middleware) GetErrorHandler() fiber.ErrorHandler {
 func (e *ES256Middleware) GetSuccessHandler() fiber.Handler {
 	return e.SuccessHandler
 }
+
+func (e *ES256Middleware) GenerateToken(claims jwt.Claims) (string, error) {
+	return jwt.NewWithClaims(jwt.SigningMethodES256, claims).SignedString(e.SignInKey())
+}

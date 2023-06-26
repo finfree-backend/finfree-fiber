@@ -3,6 +3,7 @@ package finfiber
 import (
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v2"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type JwtHandler interface {
@@ -10,6 +11,7 @@ type JwtHandler interface {
 	SignInKey() interface{}
 	GetErrorHandler() fiber.ErrorHandler
 	GetSuccessHandler() fiber.Handler
+	GenerateToken(claims jwt.Claims) (string, error)
 }
 
 func GetFiberJwtHandler(handler JwtHandler) fiber.Handler {

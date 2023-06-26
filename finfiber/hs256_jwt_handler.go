@@ -50,3 +50,7 @@ func (s *HS256Middleware) GetErrorHandler() fiber.ErrorHandler {
 func (s *HS256Middleware) GetSuccessHandler() fiber.Handler {
 	return s.SuccessHandler
 }
+
+func (s *HS256Middleware) GenerateToken(claims jwt.Claims) (string, error) {
+	return jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(s.SignInKey())
+}
